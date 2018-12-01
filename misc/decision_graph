@@ -1,0 +1,17 @@
+digraph Tree {
+node [shape=box, style="filled, rounded", color="black", fontname=helvetica] ;
+edge [fontname=helvetica] ;
+0 [label=<Judgment calls &le; 3.5<br/>gini = 0.448<br/>samples = 606<br/>value = [205, 401]<br/>class = Empathy:1.0>, fillcolor="#399de57d"] ;
+1 [label=<Weight &le; 0.544<br/>gini = 0.5<br/>samples = 194<br/>value = [97, 97]<br/>class = Empathy:0.0>, fillcolor="#e5813900"] ;
+0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
+2 [label=<gini = 0.346<br/>samples = 36<br/>value = [8, 28]<br/>class = Empathy:1.0>, fillcolor="#399de5b6"] ;
+1 -> 2 ;
+3 [label=<gini = 0.492<br/>samples = 158<br/>value = [89, 69]<br/>class = Empathy:0.0>, fillcolor="#e5813939"] ;
+1 -> 3 ;
+4 [label=<Life struggles &le; 1.5<br/>gini = 0.387<br/>samples = 412<br/>value = [108, 304]<br/>class = Empathy:1.0>, fillcolor="#399de5a4"] ;
+0 -> 4 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
+5 [label=<gini = 0.5<br/>samples = 81<br/>value = [40, 41]<br/>class = Empathy:1.0>, fillcolor="#399de506"] ;
+4 -> 5 ;
+6 [label=<gini = 0.326<br/>samples = 331<br/>value = [68, 263]<br/>class = Empathy:1.0>, fillcolor="#399de5bd"] ;
+4 -> 6 ;
+}
