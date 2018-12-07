@@ -32,14 +32,16 @@
   <h5>Testing</h5>
   To run testing with Random Forest model
   <pre>python main.py -s test -m rfc </pre>
-  
-  <h5>Training with data preparation</h5>
-  To run training with Random Forest model after data preparation steps(preprocessing, feature selection, etc.)
-  <pre>python main.py -s train -m rfc -p yes </pre>
 
   <h5>Training without data preparation</h5>
   To run training with Random Forest model skipping data preparation steps
   <pre>python main.py -s train -m rfc </pre>
+  
+  <h5>Training with data preparation</h5>
+  To run training with Random Forest model after data preparation steps(preprocessing, feature selection, etc.). Also, make sure the raw data file responses.csv is present in raw_data/ folder
+  <pre>python main.py -s train -m rfc -p yes </pre>
+
+
 
 <h5>Other options:</h5>
 
