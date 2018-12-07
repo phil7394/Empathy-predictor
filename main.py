@@ -11,7 +11,7 @@ def main():
     if args['step'] == 'train':
         if args['prep'] == 'yes' or not os.path.isfile('preproc_data/train_data.csv'):
             print('Reading raw training data...')
-            raw_df = pandas.read_csv('raw_data/response s.csv')
+            raw_df = pandas.read_csv('raw_data/responses.csv')
 
             ''' PREPROC '''
             print('\n*** Prerocessing ***')
