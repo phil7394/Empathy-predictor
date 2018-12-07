@@ -1,3 +1,4 @@
+import argparse
 import os
 
 import matplotlib.pyplot as plt
@@ -46,18 +47,16 @@ def feature_correlation(df, nr_c, targ):
     return cm, cols
 
 
-def trn_dev_tst_split(proc_df, prep=False):
-    if not os.path.isfile('preproc_data/train_data.csv') or prep:
-        train_df, dev_df, test_df = np.split(proc_df.sample(frac=1, random_state=1234),
-                                             [int(.6 * len(proc_df)), int(.8 * len(proc_df))])
-        train_df.to_csv('preproc_data/train_data.csv', index=False)
-        dev_df.to_csv('preproc_data/dev_data.csv', index=False)
-        test_df.to_csv('preproc_data/test_data.csv', index=False)
-    else:
-        train_df = pandas.read_csv('preproc_data/train_data.csv')
-        dev_df = pandas.read_csv('preproc_data/dev_data.csv')
-        test_df = pandas.read_csv('preproc_data/test_data.csv')
+def trn_dev_tst_split(proc_df):
+    train_df, dev_df, test_df = np.split(proc_df.sample(frac=1, random_state=1234),
+                                         [int(.6 * len(proc_df)), int(.8 * len(proc_df))])
     return dev_df, test_df, train_df
+
+
+def separate_class(df):
+    y = df['Empathy']
+    df.drop('Empathy', inplace=True, axis=1)
+    return df, y
 
 
 def save_features(feature_list):
@@ -70,3 +69,19 @@ def read_features(features_file):
     with open(features_file, 'r') as f:
         feature_list = f.read().splitlines()
     return feature_list
+
+
+def cmd_arg_parse():
+    parser = argparse.ArgumentParser(description='Young People Empathy Predictor')
+    optional = parser._action_groups.pop()
+    required = parser.add_argument_group('required arguments')
+    required.add_argument('-s', '--step', help='train/test step', choices=['train', 'test'], required=True)
+    required.add_argument('-m', '--model',
+                          help='model to use: dmc=DummyClassifer, svc=SVCClassifier, dtc=DecisionTreeClassifier, rfc=FandomForestClassifier',
+                          choices=['dmc', 'svc', 'dtc', 'rfc'], required=True)
+    optional.add_argument('-p', '--prep',
+                          help='do data prep steps: preprocessing, splitting, feature selection (ignored when used with test step option)',
+                          choices=['yes', 'no'], default='no')
+    parser._action_groups.append(optional)
+    args = vars(parser.parse_args())
+    return args
